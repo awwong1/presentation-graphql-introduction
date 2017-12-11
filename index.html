@@ -59,7 +59,7 @@
           </p>
 
           <p style="font-size: 70%; opacity: 0.5" class="normal-font">
-            by Oleg Ilyenko / <a href="https://twitter.com/easyangel">@easyangel</a>
+            Alexander Wong
           </p>
 				</section>
 
@@ -75,16 +75,22 @@
           <ul>
             <li>
               Over-fetching
-
               <ul class="fragment fade-in" data-fragment-index="1">
-                <li>/products?<span class="qname">field</span>=<span class="qvalue">name</span>&<span class="qname">field</span>=<span class="qvalue">description</span>&<span class="qname">field</span>=<span class="qvalue">variants[*].price</span></li>
+                <li>/user
+                  <code>{ user_id: 1234", name: "Jon Doe", email: "jon@test.com", age: 38, ... }</code>
+                </li>
               </ul>
             </li>
             <li class="fragment fade-in" data-fragment-index="2">
               Under-fetching
 
               <ul class="fragment fade-in" data-fragment-index="3">
-                <li>/products?<span class="qname">expand</span>=<span class="qvalue">productType</span>&<span class="qname">expand</span>=<span class="qvalue">variants[*].price.taxRate</span></li>
+                <li>/user
+                  <code>{ user_id: 1234 }</code>
+                </li>
+                <li>/post?<span class="qname">user_id</span>=<span class="qvalue">1234</span>
+                  <code>[...posts]</code>
+                </li>
               </ul>
             </li>
             <li class="fragment fade-in" data-fragment-index="4">
@@ -288,25 +294,7 @@ subscription ProductEvents {
         <section>
           <h2>Demo Time</h2>
           <!-- GrpahiQL, Fragments, Introspection, docs -->
-
-          <pre><code class="graphiql javascript" data-trim contenteditable>
-{
-  hero {
-    id
-    name
-  }
-}
-
-// Response
-{
-  "data": {
-    "hero": {
-      "id": "2001",
-      "name": "R2-D2"
-    }
-  }
-}
-          </code></pre>
+          [<a href="https://www.graph.cool/">https://graph.cool</a>]
         </section>
 
         <section>
@@ -338,55 +326,9 @@ subscription ProductEvents {
 
         </section>
 
-        <section>
-          <h2>Example: JavaScript</h2>
-
-          <pre><code data-trim contenteditable class="javascript">
-var ProductType = new GraphQLObjectType({
-  name: "Product",
-  description: "Commodity available for purchase",
-  fields: {
-    id: {type: GraphQLString},
-    onStock: {
-      type: GraphQLInt,
-      resolve(product) {
-        return product.onStock + 10;
-      }
-    }
-  }
-});
-          </code></pre>
-        </section>
-
-        <section>
-          <h2>Example: Scala</h2>
-
-          <pre><code data-trim contenteditable class="scala">
-val ProductType = ObjectType(
-  "Product",
-  "Commodity available for purchase",
-  fields[Unit, Product](
-    Field("id", StringType,
-      resolve = _.value.id),
-    Field("onStock", IntType,
-      resolve = _.value.onStock + 10)))
-          </code></pre>
-
-          <pre class="fragment roll-in" data-fragment-index="1"><code data-trim contenteditable class="scala">
-val ProductType = deriveObjectType[Unit, Product]()
-          </code></pre>
-        </section>
-
         <section data-background="#D45CA2" class="first-slide">
           <h1>Thank you!</h1>
-          <br>
-          <ul class="fragment roll-in" data-fragment-index="2">
-            <li><a href="http://bit.ly/graphql-introduction" target="_blank">http://bit.ly/graphql-introduction</a></li>
-            <li><strong>GraphQL:</strong> <a href="http://graphql.org" target="_blank">http://graphql.org</a></li>
-            <li><strong>Twitter:</strong> <a href="https://twitter.com/easyangel" target="_blank">https://twitter.com/easyangel</a></li>
-            <li><strong>Zero To GraphQL:</strong> <a href="http://bit.ly/zero-to-graphql" target="_blank">http://bit.ly/zero-to-graphql</a></li>
-            <li><strong>Sangria Playground:</strong> <a href="http://try.sangria-graphql.org" target="_blank">http://try.sangria-graphql.org</a></li>
-          </ul>
+
           <br><br>
           <h2 class="fragment roll-in" data-fragment-index="3" style="opacity: 0.7;">Questions?</h2>
         </section>
